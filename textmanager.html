@@ -1,0 +1,53 @@
+<html>
+<head>
+    <title>Text manager</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+<body class="container">
+
+<header style="height: 200px;">
+    <h1 class="text-center bg-warning h-50 pt-3">Text manager</h1>
+</header>
+<br>
+<div class="row">
+    <div class="col col-sm-5">
+        <div class="panel">
+            <div class="panel-body">
+                <h2>Get text</h2>
+                <form action="index.php" method="post" class="d-inline">
+                    <input type="text" name="fetch" class="col-10" value="<?php echo $fetchurl; ?>">
+                    <button type="submit" class="btn btn-success mt-3" name="buttonfetch">Fetch Text</button>
+
+                <h2>Get text</h2>
+                    <input type="text" name="keywords" class="col-10" value="<?php echo $keywords; ?>">
+                    <button type="submit" class="btn btn-success mt-3" name="buttonkeyword">Search Text</button>
+                </form>
+                <?php
+                if($display===true){
+                    foreach ($keywordArray as $keyword) {
+                        echo "<div class='mt-5'>";
+                            echo "<indic class='bg-success text-light float-left badge rounded-circle'><h4>" . count($occurrences[$keyword]) . "</h4></indic>";
+                            echo " <h3 class='ml-2'>Keyword: $keyword </h3>";
+                            echo "<div class='ml-5'>";
+                                foreach ($occurrences[$keyword] as $key=>$occurrence)
+                                    echo "<div class='d-inline-block'><a href='#$occurrence' class='text-success text-decoration-none mr-1'>$key</a></div>";
+                            echo "</div>";
+                        echo "</div>";
+                    }
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="col col-sm-7" style="padding-left: 25px;">
+        <pre><code>
+            <?php echo $text; ?>
+        </code></pre>
+    </div>
+</div>
+
+</body>
+</html>
